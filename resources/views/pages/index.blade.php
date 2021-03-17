@@ -78,6 +78,12 @@
                 </div>
             </div>
         </div>
+        <div id="month_piechart">
+
+        </div>
+        <div id="year_flowchart">
+            
+        </div>
     </div>
 @endsection
 @section('script')
