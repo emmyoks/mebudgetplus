@@ -11,6 +11,7 @@ class BudgetController extends Controller
     //
     
     public function getMonthBudget($month = null){
+        
         function availableMonths(){
             $months = ["January", "Febuary", "March", "April", "May", "June", "July", "August"
             , "September", "October", "November", "December"];
@@ -20,6 +21,32 @@ class BudgetController extends Controller
         }
         $userId = Auth::user()->id;
         $budgetTable = Budget::where('userid',$userId)->firstOrFail();
+
+        function expensesPercent($budgetTable){
+            function extractPer($objStr){
+                if(!$objStr){
+                    return 0;
+                }
+                $obj = json_decode($objStr);
+                return $obj->percentage;
+            }
+            $obj = [
+                ["Jan" =>extractPer(preg_replace('/^\d+/','',$budgetTable->jan))], 
+                ["Feb" => extractPer(preg_replace('/^\d+/','',$budgetTable->feb))], 
+                ["Mar" => extractPer(preg_replace('/^\d+/','',$budgetTable->mar))], 
+                ["Apr" => extractPer(preg_replace('/^\d+/','',$budgetTable->apr))], 
+                ["May" => extractPer(preg_replace('/^\d+/','',$budgetTable->may))], 
+                ["Jun" => extractPer(preg_replace('/^\d+/','',$budgetTable->jun))], 
+                ["Jul" => extractPer(preg_replace('/^\d+/','',$budgetTable->jul))], 
+                ["Aug" => extractPer(preg_replace('/^\d+/','',$budgetTable->aug))], 
+                ["Sep" => extractPer(preg_replace('/^\d+/','',$budgetTable->sep))], 
+                ["Oct" => extractPer(preg_replace('/^\d+/','',$budgetTable->oct))], 
+                ["Nov" => extractPer(preg_replace('/^\d+/','',$budgetTable->nov))], 
+                ["Dec" => extractPer(preg_replace('/^\d+/','',$budgetTable->dec))]
+            ];
+            return $obj;
+        }
+
         if(!$month){
             $getMonth = date("F");
             $curr = true;
@@ -47,10 +74,11 @@ class BudgetController extends Controller
             $getMonth = $monthBudget?date("F",$match[0]):null;;
         }
         $availableMonths = availableMonths();
+        $expObj = expensesPercent($budgetTable);
         $info = [
             'year' => $year,
             'month' => $getMonth,
-            'data' => $data,
+            'expObj' => $expObj,
             'budgetForList'=>$availableMonths,
             'curr' => $curr,
             'monthBudget' => $data

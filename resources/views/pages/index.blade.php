@@ -78,20 +78,21 @@
                 </div>
             </div>
         </div>
-        <div id="month_piechart">
-
-        </div>
-        <div id="year_flowchart">
-            
+        <div id="stat">
+            <h5>Expenses chart for the year.(In percentage)</h5>
+            <canvas id="year_barchart" width="1100" height="500">   
+            </canvas>
         </div>
     </div>
 @endsection
 @section('script')
+    <script src="{{ asset('js/rbar.js') }}" defer></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script>
         const userId = {{Auth::user()->id}} ;
-        const dbDataStr = @json($data);
+        const dbDataStr = @json($monthBudget);
         const dbData = JSON.parse(dbDataStr);
+        const expObj = @json($expObj);
         const curr = @json($curr);
         const abs_url = "{{ url('/') }}"
     </script>

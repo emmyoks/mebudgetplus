@@ -300,6 +300,16 @@ var appController = (function(budget,ui,api){
             api.addToBudget(JSON.stringify(budget.getData()));
         }
     }
+
+    function barChart(){
+        var barcolor = ['#5c5fff', '#bb48e6', '#f12bc3', '#567bbd', '#ffb357', '#5c1bff', '#ba44e6', '#f1bbc5', '#f67cbd', '#fff357', '#baf4e6', '#f1bbc5'];
+        generateBarGraph({
+            barId: 'year_barchart',
+            barAnimationSpeed: 0.5,
+            barData: expObj,
+            barColour: barcolor
+          });
+    }
     // EventListeners
     if(curr){
         document.querySelector(DOMStrings.itemContainer).addEventListener('click', deleteItem)
@@ -339,7 +349,8 @@ var appController = (function(budget,ui,api){
                     percentage: -1
                 });
             }
-            console.log(budget.getData());
+            barChart();
+            console.log(expObj);
             ui.randomBackImage();
 
         }

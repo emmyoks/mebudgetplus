@@ -224,7 +224,13 @@ h2 {
 .item:hover .item-value { transform: translateX(-20px); }
 .item:hover .item-percentage { transform: translateX(-20px); }
 
-
+#stat{
+    overflow-x: auto;
+    text-align: center;
+}
+#stat h5{
+    text-decoration: underline;
+}
 
 @media screen and (max-width:850px){
     .top{height:auto;
