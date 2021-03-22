@@ -79,7 +79,7 @@
             </div>
         </div>
         <div id="stat">
-            <h5>Expenses chart for the year.(In percentage)</h5>
+            <h5>Expenses chart for the year.(In percentages)</h5>
             <canvas id="year_barchart" width="1100" height="500">   
             </canvas>
         </div>
@@ -91,7 +91,7 @@
     <script>
         const userId = {{Auth::user()->id}} ;
         const dbDataStr = @json($monthBudget);
-        const dbData = JSON.parse(dbDataStr);
+        const dbData = dbDataStr?JSON.parse(dbDataStr):null;
         const expObj = @json($expObj);
         const curr = @json($curr);
         const abs_url = "{{ url('/') }}"

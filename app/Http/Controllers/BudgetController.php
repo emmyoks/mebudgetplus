@@ -54,7 +54,7 @@ class BudgetController extends Controller
             $currMonth = strtolower($match[0]);
             $monthBudget = $budgetTable->$currMonth;
             preg_match( '/^\d+/', $monthBudget, $match);
-            $year = date("Y",$match[0]);
+            $year = $monthBudget?date("Y",$match[0]):null;
             if($year != date("Y")){
                 $budgetTable->$currMonth = time();
                 $budgetTable->save();
