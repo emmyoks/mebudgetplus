@@ -11,8 +11,8 @@
         </a>
     
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            @foreach ($budgetForList as $month)
-            <a class="dropdown-item" href="{{ url('/') }}/for/{{$month}}">{{$month}}</a>
+            @foreach ($budgetForList as $mon)
+            <a class="dropdown-item" href="{{ url('/') }}/for/{{$mon}}">{{$mon}}</a>
             @endforeach
         </div>
     </div>
